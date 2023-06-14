@@ -592,11 +592,11 @@ server:
   # Commenting out or setting as empty the affinity variable, will allow
   # deployment to single node services such as Minikube
   # This should be either a multi-line string or YAML matching the PodSpec's affinity field.
-  affinity: 
+  affinity: |
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
+        nodeSelectorTerms:
+        - matchExpressions:
           - key: agentpool
             operator: In
             values:
