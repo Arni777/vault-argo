@@ -1,0 +1,19 @@
+name: Trigger AWS Lambda on PR Merge
+
+on:
+  pull_request:
+    types:
+      - closed
+      
+jobs:
+  trigger_lambda:
+    runs-on: ubuntu-latest
+  
+  steps:
+  - name: Trigger AWS Lambda 
+    run: |
+      if [ "@GITHUB_EVENT_NAME" = "pull_request" ] && [ "GITHUB_EVENT_ACTION" = "closed" ] && [ "$GITHUB_EVENT_PULL_REQUEST_MERGED" = "true" ]; then
+        LAMDBA_URL = "https://xqmp6zodmbzrwzbnjhyw2syglm0zwfpd.lambda-url.eu-central-1.on.aws"
+        AUTH_TOKEN = "XXX"
+
+        curl -X POST "$LAMBDA_URL" -d '{}'
